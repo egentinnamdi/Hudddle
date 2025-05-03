@@ -28,9 +28,9 @@ export default function Packages() {
         <h1 className='font-bold'>Packages</h1>
         <div>
         <Tabs defaultValue="all packages" className="w-full">
-            <TabsList>
+            <TabsList className='w-screen overflow-x-auto'>
                 {tabs.map((item)=> 
-                <TabsTrigger className='w-80 h-12 !font-bold text-gray-700 flex gap-3 items-center !capitalize bg-[#EAEAEA] rounded-none rounded-t-3xl' key={item} value={item}>
+                <TabsTrigger className='lg:w-80 w-1/3 h-12 !font-bold text-gray-700 flex gap-3 items-center !capitalize bg-[#EAEAEA] rounded-none rounded-t-3xl' key={item} value={item}>
                     <List className='text-hudddle'/>
                     {item} 
                     <span className='bg-hudddle py-0.5 px-3.5 text-xs font-medium rounded-xl text-white'>21</span>
@@ -38,8 +38,8 @@ export default function Packages() {
                 )}
             </TabsList>
             <div className='bg-white p-5 min-h-[65vh] rounded-lg space-y-5'>
-                <div className='flex justify-between'>
-                    <div className='relative w-1/3'>
+                <div className='flex lg:flex-row flex-col-reverse gap-5 lg:justify-between'>
+                    <div className='relative lg:w-1/3'>
                         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                             <Search size={18} />
                         </span>

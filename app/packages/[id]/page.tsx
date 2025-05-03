@@ -22,32 +22,32 @@ export default function Order() {
     // const params = useParams()
 
   return (
-    <div className='flex-grow flex justify-center bg-gray-50'>
-      <div className='w-2/3 h-full capitalize p-10 flex flex-col gap-5'>
-        <div className='flex text-gray-400 items-center gap-2'>
+    <div className='flex-grow lg:flex justify-center bg-gray-50'>
+      <div className='lg:w-2/3 lg:h-full capitalize lg:p-10 p-5 flex flex-col gap-5'>
+        <div className='flex text-sm lg:text-base text-gray-400 items-center gap-2'>
             <span className='font-medium'>all packages</span>
             <ChevronLeft className='p-1'/>
             <span className='text-claimed-text font-bold'>#0002</span>
         </div>
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center lg:px-0 px-7 gap-3'>
             <h1 className='font-extrabold text-gray-800'>Order: #0002</h1>
             <span className='bg-[#FF91F2] px-4 py-0.5 rounded-full font-medium text-white text-sm'>furniture</span>
         </div>
-        <div className='flex gap-5'>
-            <div className=' w-1/4 flex justify-center items-center'>
-                <div className='bg-gray-300 rounded-3xl size-40'></div>
+        <div className='flex lg:flex-row flex-col lg:gap-5 gap-7 px-7'>
+            <div className=' lg:w-1/4 flex items-center'>
+                <div className='bg-gray-300 rounded-3xl lg:size-40 size-60'></div>
             </div>
-            <div className='w-1/4 flex flex-col justify-center gap-7 font-bold text-sm'>
+            <div className='lg:w-1/4 flex flex-col justify-center gap-7 font-bold text-sm'>
                 <span>data received: <span className='text-claimed-text'>27/11/25</span></span>
                 <span>status: <span className='px-5 text-claimed-text bg-claimed py-0.5 rounded-full font-medium'>arrived</span></span>
                 <span>product description: <br /> <span className='font-normal normal-case w-3/4 block'>I know there are moments when on abundance of jobs...</span></span>
             </div>
-            <div className='w-1/4 flex flex-col justify-center gap-7 font-bold text-sm'>
+            <div className='lg:w-1/4 flex flex-col justify-center gap-7 font-bold text-sm'>
                 <span>ordered to: <br /> <span className='font-medium text-claimed-text'> baserterne, st kitts</span></span>
                 <span>ordered from: <br /> <span className='font-medium text-claimed-text'> baseterre,st kitts</span></span>
                 <span>package content: <br /> <span className='font-medium text-claimed-text'>new oraimo  head </span></span>
             </div>
-            <div className='w-1/4 flex flex-col justify-center gap-7 font-bold text-sm'>
+            <div className='lg:w-1/4 flex flex-col justify-center gap-7 font-bold text-sm'>
                 <span>location: <br /><span className='font-medium text-claimed-text'> baserterne, st kitts</span></span>
                 <span>product description: <br /><span className='font-medium text-claimed-text'> baserterne, st kitts</span></span>
             </div>
@@ -55,16 +55,16 @@ export default function Order() {
         <Tabs defaultValue="tracking location" className="w-ful pt-12">
             <TabsList>
                 {tabs.map((item)=> 
-                <TabsTrigger className='w-80 h-12 !font-bold text-gray-700 flex gap-3 items-center !capitalize bg-[#EAEAEA] rounded-none rounded-t-3xl' key={item.title} value={item.title}>
+                <TabsTrigger className='lg:w-80 min-w-40  h-12 !font-bold text-gray-700 flex gap-3 items-center !capitalize bg-[#EAEAEA] rounded-none rounded-t-3xl' key={item.title} value={item.title}>
                     <item.icon className='text-hudddle'/>
-                    {item.title} 
+                    <span className='lg:text-base text-sm'>{item.title}</span>
                     {/* <span className='bg-hudddle py-0.5 px-3.5 text-xs font-medium rounded-xl text-white'>21</span> */}
                 </TabsTrigger>
                 )}
             </TabsList>
             <TabsContent value="tracking location">
-                <div className='bg-white rounded-lg p-10'>
-                    <div className='bg-hudddle/10 p-5 rounded-3xl'>
+                <div className='bg-white rounded-lg lg:p-10 p-5'>
+                    <div className='bg-hudddle/10 lg:p-5 p-4 rounded-3xl'>
                         <span className='font-bold text-sm'>status: <span className='px-7 text-claimed-text bg-claimed py-0.5 rounded-full font-medium'>arrived</span></span>
                     </div>
                     <div className='min-h-32 flex p-5 gap-3'>
@@ -79,7 +79,7 @@ export default function Order() {
             </TabsContent>
         </Tabs>
       </div>
-      <div className='w-1/3 p-10 h-full flex flex-col items-center justify-center gap-20'>
+      <div className='lg:w-1/3 lg:p-10 p-10 pt-0 lg:h-full flex flex-col items-center justify-center lg:gap-20 gap-10'>
         <div className='border border-claimed-text p-1 rounded-3xl'>
                 <div className='grid place-items-center bg-claimed-text p-5 rounded-3xl size-80'>
                     <QRCodeCanvas size={200} bgColor='#0D6534' fgColor='#BCBCBC' value="https://example.com" />
@@ -88,8 +88,10 @@ export default function Order() {
         <div className='space-y-5'>
             <div className='flex flex-col gap-2'>
                 <span className='font-bold text-sm'>Next Steps</span>
-                <span className='pl-2'>1. Open your <b>ShipIt</b> Admin phone application.</span>
-                <span className='pl-2'>2. Check your notifications for the QR code <span className='pl-4'>notification.</span></span>
+                <ol className='list-decimal pl-4 space-y-3'>
+                    <li className='pl-2'>Open your <b>ShipIt</b> Admin phone application.</li>
+                    <li className='pl-2'>Check your notifications for the QR code notification.</li>
+                </ol>
             </div>
             <div className='flex flex-col gap-5' >
                 <Label><b>or enter tracking code</b></Label>

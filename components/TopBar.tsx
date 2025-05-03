@@ -25,19 +25,19 @@ export default function TopBar() {
     <div className="items-center capitalize min-h-20 p-5 flex shadow-lg justify-between">
         <div className='flex gap-x-3 items-center'>
             <SidebarTrigger/>
-            <h2 className='text-2xl font-light'>good morning, <span className='font-bold text-hudddle'>Nnamdi</span></h2>
-            <span className='pt-1 text-sm text-gray-400 font-medium'>{formattedDate}</span>
+            <h2 className='lg:text-2xl font-light'>good morning, <span className='font-bold text-hudddle'>Nnamdi</span></h2>
+            {/* <span className='pt-1 text-sm text-gray-400 font-medium'>{formattedDate}</span> */}
         </div>
-        <div className='flex text-gray-500 gap-3 item-center justify-center w-1/4'>
-            <Avatar className='size-10'>
+        <div className='flex text-gray-500 gap-3 item-center justify-center min-w-1/4'>
+            <Avatar>
                 <AvatarImage src="/image.png" alt="profile" />
                 <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <p className='font-medium p-2.5'>Egenti Nnamdi</p>
+            {/* <p className='font-medium lg:text-base text-sm p-2.5'>Egenti Nnamdi</p> */}
             <div>
                 <Menubar>
                     <MenubarMenu>                
-                        <MenubarTrigger className='!border-none'>
+                        <MenubarTrigger>
                             <ChevronDown className='text-claimed-text'/>
                         </MenubarTrigger>
                         <MenubarContent className='capitalize'>
