@@ -1,5 +1,8 @@
 import React from 'react'
 import { SidebarTrigger } from './ui/sidebar'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { ChevronDown } from 'lucide-react';
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from './ui/menubar';
 
 export default function TopBar() {
     const dateToday = new Date();
@@ -25,7 +28,27 @@ export default function TopBar() {
             <h2 className='text-2xl font-light'>good morning, <span className='font-bold text-hudddle'>Nnamdi</span></h2>
             <span className='pt-1 text-sm text-gray-400 font-medium'>{formattedDate}</span>
         </div>
-        <div></div>
+        <div className='flex text-gray-500 gap-3 item-center justify-center w-1/4'>
+            <Avatar className='size-10'>
+                <AvatarImage src="/image.png" alt="profile" />
+                <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <p className='font-medium p-2.5'>Egenti Nnamdi</p>
+            <div>
+                <Menubar>
+                    <MenubarMenu>                
+                        <MenubarTrigger className='!border-none'>
+                            <ChevronDown className='text-claimed-text'/>
+                        </MenubarTrigger>
+                        <MenubarContent className='capitalize'>
+                            <MenubarItem>details</MenubarItem>
+                            <MenubarItem>delete</MenubarItem>
+                            <MenubarItem>clear</MenubarItem>
+                        </MenubarContent>
+                    </MenubarMenu>
+                </Menubar>
+            </div>
+        </div>
     </div>
   )
 }

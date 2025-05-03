@@ -29,10 +29,10 @@ export default function Home() {
   // const params = useParams()
   
   return (
-    <div className="flex-grow flex justify-center bg-gray-100 rounded-xl">
+    <div className="flex-grow flex justify-center bg-gray-50 rounded-xl">
       <div className="w-11/12 flex flex-col justify-evenly capitalize">
         <div className="flex  justify-between">
-          <h1 className="font-bold">dashboard</h1>
+          <h1 className="font-bold text-gray-700">dashboard</h1>
           <div className="flex gap-3 items-center">
             <Button variant="outline" className="p-3 border-claimed-text">Clear Package</Button>
             <Button className="!p-3 bg-claimed-text">Register Package</Button>
