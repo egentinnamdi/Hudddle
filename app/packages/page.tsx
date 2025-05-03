@@ -30,7 +30,7 @@ export default function Packages() {
         <Tabs defaultValue="all packages" className="w-full">
             <TabsList className='w-screen overflow-x-auto'>
                 {tabs.map((item)=> 
-                <TabsTrigger className='lg:w-80 w-1/3 h-12 !font-bold text-gray-700 flex gap-3 items-center !capitalize bg-[#EAEAEA] rounded-none rounded-t-3xl' key={item} value={item}>
+                <TabsTrigger className='lg:w-80 w-40 h-12 !font-bold text-gray-700 flex gap-3 items-center !capitalize bg-[#EAEAEA] rounded-none rounded-t-3xl' key={item} value={item}>
                     <List className='text-hudddle'/>
                     {item} 
                     <span className='bg-hudddle py-0.5 px-3.5 text-xs font-medium rounded-xl text-white'>21</span>

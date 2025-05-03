@@ -5,22 +5,22 @@ import { ChevronDown } from 'lucide-react';
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from './ui/menubar';
 
 export default function TopBar() {
-    const dateToday = new Date();
+    // const dateToday = new Date();
 
-    function getOrdinal(n: number) {
-        if (n > 3 && n < 21) return "th";
-        switch (n % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
-        }
-    }
+    // function getOrdinal(n: number) {
+    //     if (n > 3 && n < 21) return "th";
+    //     switch (n % 10) {
+    //         case 1: return "st";
+    //         case 2: return "nd";
+    //         case 3: return "rd";
+    //         default: return "th";
+    //     }
+    // }
 
-    const day = dateToday.getDate();
-    const month = dateToday.toLocaleString('default', { month: 'long' });
-    const year = dateToday.getFullYear();
-    const formattedDate = `${day}${getOrdinal(day)} ${month}, ${year}`;
+    // const day = dateToday.getDate();
+    // const month = dateToday.toLocaleString('default', { month: 'long' });
+    // const year = dateToday.getFullYear();
+    // const formattedDate = `${day}${getOrdinal(day)} ${month}, ${year}`;
   return (
     <div className="items-center capitalize min-h-20 p-5 flex shadow-lg justify-between">
         <div className='flex gap-x-3 items-center'>

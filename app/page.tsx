@@ -30,7 +30,7 @@ export default function Home() {
   
   return (
     <div className="flex-grow flex justify-center bg-gray-50 rounded-xl">
-      <div className="w-11/12 flex flex-col lg:justify-evenly justify-around capitalize">
+      <div className="min-w-96 lg:pb-0 pb-10 lg:w-11/12 gap-7 lg:gap-0 flex flex-col justify-evenly capitalize">
         <div className="lg:flex justify-between">
           <h1 className="font-bold text-gray-700">dashboard</h1>
           <div className="flex gap-3 lg:flex-row flex-row-reverse items-center justify-end">
@@ -38,7 +38,7 @@ export default function Home() {
             <Button className="!p-3 bg-claimed-text">Register Package</Button>
           </div>
         </div>
-        <div className="w-full h-3/4 lg:gap-3 lg:grid grid-cols-[1.5fr_1fr_1fr] flex flex-col gap-5 grid-rows-2">
+        <div className="w-full lg:h-3/4 lg:gap-3 lg:grid grid-cols-[1.5fr_1fr_1fr] flex flex-col gap-5 grid-rows-2">
           {dashItem.map((item)=>{
             const {title} = item
             return(
