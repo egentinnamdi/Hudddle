@@ -37,7 +37,7 @@ export default function RootLayout({
             <div className=" w-full flex flex-col">  
               <TopBar/>
               {children}
-              <Toaster/>
+              <Toaster position="top-center"/>
             </div>
           </div>
         </SidebarProvider>

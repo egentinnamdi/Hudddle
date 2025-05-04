@@ -2,12 +2,14 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
+import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
 import { z } from "zod"
 import { Button } from './ui/button'
 import { FormControl, FormField, FormItem, FormLabel, Form, FormMessage } from './ui/form'
 import { Input } from './ui/input'
-// import { toast } from 'sonner'
+import { toast } from 'sonner'
+import { Textarea } from './ui/textarea'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 
 
 //  order no, category, warehouse receipt, supplier, weight, date sent, date received, status, description, package content, location
@@ -15,24 +17,23 @@ import { Input } from './ui/input'
 
 const formItems: Array<{title: string; type?: string; options?: Array<string>}>= [
     {
-        title: "package content",
+        title: "packageContent",
     },
     {
         title: "category",
         options: ["electronics", "fashion", "furniture"]
     },
     {
-        title: "warehouse receipt",
+        title: "warehouseReceipt",
     },
     {
         title: "supplier",
     },
     {
-        title: "weight",
-        type: "number"
+        title: "description",
     },
     {
-        title: "description",
+        title: "weight",
     },
     {
         title: "status",
@@ -44,13 +45,13 @@ const formItems: Array<{title: string; type?: string; options?: Array<string>}>=
 ]
 
 
-export default function OrderForm() {
+export default function OrderForm({onSuccess}: {onSuccess: ()=> void}) {
     const formSchema= z.object({
-        packageContent: z.string().min(5, {message: "Must be % or more characters long"}),
+        packageContent: z.string().min(5, {message: "Must be 5 or more characters long"}),
         category: z.union([z.literal("electronics"), z.literal("furniture"), z.literal("fashion")]),
-        warehouseReceipt: z.number(),
+        warehouseReceipt: z.string(),
         supplier: z.string(),
-        weight: z.number(),
+        weight: z.string(),
         description: z.string().refine((val)=> val.length >= 20, {message: "Description length is too short"}),
         status: z.union([z.literal("unclaimed"), z.literal("overdue"), z.literal("in-transit"), z.literal("claimed")]),
         location: z.string()
@@ -63,9 +64,9 @@ export default function OrderForm() {
         defaultValues: {
             packageContent: "",
             category: "electronics",
-            warehouseReceipt: 0,
+            warehouseReceipt: "",
             supplier: "",
-            weight: 0,
+            weight: "",
             description: "",
             status: "unclaimed",
             location: ""
@@ -73,15 +74,15 @@ export default function OrderForm() {
     })
 
     function onSubmit(values: OrderFormType){
-        console.log("hello")
-        // try{
-        //     toast("New Order Created...", {description: "You will be redirected"})
-
-        // }catch(err){
-        //     console.log(err)
-        // }finally{
-        //     form.reset()
-        // }
+        try{
+            console.log(values)
+            onSuccess()
+            toast("New Order Created...", {description: "You will be redirected"})
+        }catch(err){
+            console.log(err)
+        }finally{
+            form.reset()
+        }
     }
   return (
     <DialogContent>
@@ -92,45 +93,41 @@ export default function OrderForm() {
         <Form {...form}>
             <form className='flex flex-col gap-7' onSubmit={form.handleSubmit(onSubmit)}>
                 <div className='grid grid-cols-2 gap-5'>
-                    {formItems.map((item, index)=>(
-                        <FormField
+                    {formItems.map((item, index)=>{
+                        const {title} = item
+                    return <FormField
                           key={index}
                           control={form.control}
-                          name={item.title as keyof OrderFormType}
+                          name={item.title as "packageContent" | "category" | "status" | "warehouseReceipt" | "supplier" | "weight" | "description" | "location"}
                           render={({field})=>(
-                              <FormItem>
+                              <FormItem className={`${title === "description" && "col-span-2"}`}>
                                   <FormLabel className='capitalize'>{item.title}</FormLabel>
                                   <FormControl>
-                                      <Input  type={item.type === "number"? "number" : "text"} {...field} 
-                                        onChange={(e)=>{
-                                            if(item.type === "number"){
-                                                field.onChange(e.target.value === ""? "" : Number(e.target.value))
-                                            }else{
-                                                field.onChange(e.target.value)
-                                            }
-                                        }}
-                                        value={field.value}
-                                      />
+                                      {title === "category" || title === "status"? 
+                                        <Select>
+                                            <SelectTrigger className="w-full">
+                                                <SelectValue placeholder={title} />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    {item.options?.map((option, index)=>(
+                                                        <SelectItem key={index} value={option}><span className='capitalize'>{option}</span></SelectItem>
+                                                    ))}
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
+                                      : title === "description"?
+                                      <Textarea rows={5} className='col-span-2' placeholder="Type your message here." />
+                                      : <Input {...field} value={field.value}/>}
                                   </FormControl>
                                   <FormMessage/>
                               </FormItem>
                           )}
                         />
-                    ))}
+                    })}
                 </div>
                 <div className='flex justify-end'>
-                    <DialogClose className="w-1/4" asChild
-                    >
-                        <Button 
-                        type="submit" 
-                        onClick={() => {
-                            form.handleSubmit(onSubmit)();
-                        }}
-                        className='w-2/4 h-10'
-                        >
-                        Submit
-                        </Button>
-                    </DialogClose>
+                        <Button type="submit" className='w-2/4 h-10'>Submit</Button>
                 </div>
             </form>
         </Form>      

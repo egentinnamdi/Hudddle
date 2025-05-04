@@ -1,15 +1,13 @@
 "use client"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import React from 'react'
+import React, { useState } from 'react'
 import { EllipsisVertical, List, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
     Table,
     TableBody,
-    // TableCaption,
     TableCell,
-    // TableFooter,
     TableHead,
     TableHeader,
     TableRow,
@@ -24,8 +22,9 @@ const tabs= ["all packages", "arrived", "in-transit"]
 const headers= ["order#", "category", "warehouse receipt", "supplier", "weight", "data sent", "data received", "status", "action"]
 export default function Packages() {
     const router = useRouter()
+    const [open, setOpen] = useState(false)
   return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <div className='flex-grow flex justify-center bg-gray-50'>
                 <div className='w-11/12  capitalize flex flex-col gap-5 !text-gray-800'>
                     <h1 className='font-bold'>Packages</h1>
@@ -53,7 +52,7 @@ export default function Packages() {
                                     <DialogTrigger asChild>
                                         <Button className="!p-3 bg-claimed-text">Register Package</Button>
                                     </DialogTrigger>
-                                    <OrderForm/>
+                                    <OrderForm onSuccess={()=> setOpen(false)}/>
                                 </div>
                         </div>
                             <TabsContent value="all packages">
