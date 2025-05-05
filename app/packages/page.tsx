@@ -16,6 +16,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useRouter } from 'next/navigation';
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import OrderForm from '@/components/OrderForm';
+import { api } from '@/convex/_generated/api';
+import {useMutation, useQuery } from 'convex/react';
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar';
+import { toast } from 'sonner';
+import DeleteBtn from '@/components/DeleteBtn';
 
 
 const tabs= ["all packages", "arrived", "in-transit"]
@@ -23,6 +28,9 @@ const headers= ["order#", "category", "warehouse receipt", "supplier", "weight",
 export default function Packages() {
     const router = useRouter()
     const [open, setOpen] = useState(false)
+    const allOrders = useQuery(api.order.getAllOrders)
+    const deleteOrder = useMutation(api.order.deleteOrder)
+
   return (
         <Dialog open={open} onOpenChange={setOpen}>
             <div className='flex-grow flex justify-center bg-gray-50'>
@@ -48,7 +56,7 @@ export default function Packages() {
                                     <Input className='h-10 rounded-3xl'/>
                                 </div>
                                 <div className="flex gap-3 items-center">
-                                    <Button variant="outline" className="p-3 border-claimed-text">Clear Package</Button>
+                                    <DeleteBtn/>
                                     <DialogTrigger asChild>
                                         <Button className="!p-3 bg-claimed-text">Register Package</Button>
                                     </DialogTrigger>
@@ -65,18 +73,42 @@ export default function Packages() {
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
-                                        {Array.from({length: 5}).map((_, index) => (
-                                            <TableRow onClick={()=> router.push(`/packages/${index}`) } key={index} className='cursor-pointer !border-none !p-2'>
+                                        {allOrders?.map((item, index) => (
+                                            <TableRow onClick={()=> router.push(`/packages/${item._id}`) } key={index} className='cursor-pointer !border-none !p-2'>
                                                 <TableCell><Checkbox className='border-claimed-text bg-white'/></TableCell>
-                                                <TableCell>#0001</TableCell>
-                                                <TableCell>Electronics</TableCell>
-                                                <TableCell>1124</TableCell>
-                                                <TableCell>Kings way</TableCell>
-                                                <TableCell>200g</TableCell>
-                                                <TableCell>27/11/25</TableCell>
-                                                <TableCell>27/11/25</TableCell>
-                                                <TableCell>In-transit</TableCell>
-                                                <TableCell><EllipsisVertical/></TableCell>
+                                                <TableCell>#{item._id.slice(0, 11)}</TableCell>
+                                                <TableCell>{item.category}</TableCell>
+                                                <TableCell>{item.warehouseReceipt}</TableCell>
+                                                <TableCell>{item.supplier}</TableCell>
+                                                <TableCell>{item.weight}</TableCell>
+                                                <TableCell>{(new Date(item.dateSent)).toLocaleDateString()}</TableCell>
+                                                <TableCell>{item.dateReceived? item.dateReceived: <i>pending...</i>}</TableCell>
+                                                <TableCell>{item.status}</TableCell>
+                                                <TableCell onClick={(e)=>{
+                                                    e.preventDefault()
+                                                    e.stopPropagation()
+                                                }}>
+                                                    <Menubar>
+                                                        <MenubarMenu>                
+                                                            <MenubarTrigger>
+                                                                <EllipsisVertical/>
+                                                            </MenubarTrigger>
+                                                            <MenubarContent className='capitalize'>
+                                                                <MenubarItem onClick={(e)=> {
+                                                                     e.preventDefault()
+                                                                     e.stopPropagation()
+                                                                    try{
+                                                                        deleteOrder({orderId: item._id})
+                                                                    }catch(err){
+                                                                        const error = err as Error
+                                                                        console.log(error)
+                                                                        toast.error(error.message)
+                                                                    }
+                                                                }}>delete</MenubarItem>
+                                                            </MenubarContent>
+                                                        </MenubarMenu>
+                                                    </Menubar>
+                                                </TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>

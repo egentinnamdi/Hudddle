@@ -10,6 +10,8 @@ import { Input } from './ui/input'
 import { toast } from 'sonner'
 import { Textarea } from './ui/textarea'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select'
+import { useMutation } from "convex/react";
+import { api } from '@/convex/_generated/api'
 
 
 //  order no, category, warehouse receipt, supplier, weight, date sent, date received, status, description, package content, location
@@ -46,6 +48,7 @@ const formItems: Array<{title: string; type?: string; options?: Array<string>}>=
 
 
 export default function OrderForm({onSuccess}: {onSuccess: ()=> void}) {
+    const createNewOrder= useMutation(api.order.createOrder)
     const formSchema= z.object({
         packageContent: z.string().min(5, {message: "Must be 5 or more characters long"}),
         category: z.union([z.literal("electronics"), z.literal("furniture"), z.literal("fashion")]),
@@ -73,12 +76,14 @@ export default function OrderForm({onSuccess}: {onSuccess: ()=> void}) {
         }
     })
 
-    function onSubmit(values: OrderFormType){
+    async function onSubmit(values: OrderFormType){
         try{
+            createNewOrder({...values, weight: Number(values.weight)})
             console.log(values)
             onSuccess()
             toast("New Order Created...", {description: "You will be redirected"})
         }catch(err){
+            toast.error("Something went wrong, please try again")
             console.log(err)
         }finally{
             form.reset()
@@ -104,7 +109,15 @@ export default function OrderForm({onSuccess}: {onSuccess: ()=> void}) {
                                   <FormLabel className='capitalize'>{item.title}</FormLabel>
                                   <FormControl>
                                       {title === "category" || title === "status"? 
-                                        <Select>
+                                        <Select 
+                                            onValueChange={(value: string) => {
+                                              if (title === "category") {
+                                                form.setValue("category", value as "electronics" | "fashion" | "furniture");
+                                              } else if (title === "status") {
+                                                form.setValue("status", value as "unclaimed" | "overdue" | "in-transit" | "claimed");
+                                              }
+                                            }} 
+                                            value={field.value}>
                                             <SelectTrigger className="w-full">
                                                 <SelectValue placeholder={title} />
                                             </SelectTrigger>
@@ -117,7 +130,7 @@ export default function OrderForm({onSuccess}: {onSuccess: ()=> void}) {
                                             </SelectContent>
                                         </Select>
                                       : title === "description"?
-                                      <Textarea rows={5} className='col-span-2' placeholder="Type your message here." />
+                                      <Textarea {...field} value={field.value} rows={5} className='col-span-2' placeholder="Type your message here." />
                                       : <Input {...field} value={field.value}/>}
                                   </FormControl>
                                   <FormMessage/>

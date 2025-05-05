@@ -58,7 +58,10 @@ export default function Navbar() {
                     <SidebarMenu className=' capitalize'>
                         {sidebarItems.map((item) => {
                           const href =`/${item.title === "dashboard"? "" : item.title}`
-                          const isActive = pathname === href
+                          const isActive =
+                          item.title === "dashboard"
+                            ? pathname === "/"
+                            : pathname === href || pathname.startsWith(href + "/");
                                return <SidebarMenuItem className='py-5' key={item.title}>
                                     <SidebarMenuButton className={` ${isActive? "text-orange-500 hover:text-orange-600": "text-gray-700"} text-base font-bold`} asChild>
                                         <Link href={href}>
