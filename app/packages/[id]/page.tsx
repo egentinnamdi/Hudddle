@@ -58,7 +58,7 @@ export default function Order() {
             </div>
             <div className='lg:w-1/4 flex flex-col justify-center gap-7 font-bold text-sm'>
                 <span>location: <br /><span className='font-medium text-claimed-text'>{order?.location}</span></span>
-                <span>product description: <br /><span className='font-medium text-claimed-text'> baserterne, st kitts</span></span>
+                <span>tracking id: <br /><span className='font-medium text-claimed-text'>{order?._id}</span></span>
             </div>
         </div>
         <Tabs defaultValue="tracking location" className="w-ful pt-12">

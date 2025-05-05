@@ -21,6 +21,7 @@ import {useMutation, useQuery } from 'convex/react';
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar';
 import { toast } from 'sonner';
 import DeleteBtn from '@/components/DeleteBtn';
+import { useMediaQuery } from 'react-responsive';
 
 
 const tabs= ["all packages", "arrived", "in-transit"]
@@ -30,20 +31,21 @@ export default function Packages() {
     const [open, setOpen] = useState(false)
     const allOrders = useQuery(api.order.getAllOrders)
     const deleteOrder = useMutation(api.order.deleteOrder)
+    const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
         <Dialog open={open} onOpenChange={setOpen}>
             <div className='flex-grow flex justify-center bg-gray-50'>
                 <div className='w-11/12  capitalize flex flex-col gap-5 !text-gray-800'>
-                    <h1 className='font-bold'>Packages</h1>
+                    <h1 className="font-bold p-5 lg:p-0 text-gray-700 text-3xl">packages</h1>
                     <div>
                     <Tabs defaultValue="all packages" className="w-full">
-                        <TabsList>
+                        <TabsList className='min-w-96 lg:w-fit !overflow-x-auto overflow-y-hidden'>
                             {tabs.map((item)=> 
-                            <TabsTrigger className='lg:w-80 w-40 h-12 !font-bold text-gray-700 flex gap-3 items-center !capitalize bg-[#EAEAEA] rounded-none rounded-t-3xl' key={item} value={item}>
+                            <TabsTrigger className='lg:w-80 w-1/4 h-12 !font-bold text-gray-700 flex gap-3 items-center !capitalize bg-[#EAEAEA] rounded-none rounded-t-3xl' key={item} value={item}>
                                 <List className='text-hudddle'/>
                                 {item} 
-                                <span className='bg-hudddle py-0.5 px-3.5 text-xs font-medium rounded-xl text-white'>21</span>
+                                {isMobile? null :<span className='bg-hudddle py-0.5 px-3.5 text-xs font-medium rounded-xl text-white'>21</span>}
                             </TabsTrigger>
                             )}
                         </TabsList>

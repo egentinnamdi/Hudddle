@@ -46,8 +46,8 @@ export default function Home() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <div className="flex-grow flex justify-center bg-gray-50 rounded-xl">
-        <div className="min-w-96 lg:pb-0 pb-10 px-10 lg:w-11/12 gap-7 lg:gap-0 flex flex-col justify-evenly capitalize">
-          <div className="lg:flex justify-between pt-7 space-y-5 lg:space-y-0 lg:pt-0">
+        <div className="w-screen lg:pb-0 pb-10  lg:w-11/12 gap-7 lg:gap-0 flex flex-col justify-evenly capitalize">
+          <div className="lg:flex justify-between px-8 pt-7 space-y-5 lg:space-y-0 lg:p-0">
             <h1 className="font-bold text-gray-700 text-3xl">dashboard</h1>
             <div className="flex gap-3 lg:flex-row flex-row-reverse items-center justify-end">
               <DeleteBtn/>
@@ -61,7 +61,7 @@ export default function Home() {
             {dashItem.map((item)=>{
               const {title} = item
               return(
-                <div key={item.title} className={`${item.color} flex flex-col gap-4 lg:gap-5 justify-between ${title === "in-transit"? "text-gray-800" : title === "claimed"?  "text-claimed-text" :"text-white"} p-10  bg-claimed ${item?.span} rounded-2xl`}>
+                <div key={item.title} className={`${item.color} w-5/6 flex flex-col gap-4 lg:gap-5 justify-between ${title === "in-transit"? "text-gray-800" : title === "claimed"?  "text-claimed-text" :"text-white"} p-10  bg-claimed ${item?.span} rounded-2xl`}>
                   <span className="text-xl text-gray-800">{item.title}</span>
                   <span className="text-4xl font-bold">
                     {condition 
