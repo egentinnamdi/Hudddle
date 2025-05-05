@@ -24,7 +24,7 @@ import DeleteBtn from '@/components/DeleteBtn';
 import { useMediaQuery } from 'react-responsive';
 
 
-const tabs= ["all packages", "arrived", "in-transit"]
+const tabs= ["all packages", "in-transit"]
 const headers= ["order#", "category", "warehouse receipt", "supplier", "weight", "data sent", "data received", "status", "action"]
 export default function Packages() {
     const router = useRouter()
