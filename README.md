@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Huddlde Technical Assessment
 
-## Getting Started
+This is my implementation of the design provided for the Huddlde technical assessment. The project is built to demonstrate my technical skills, attention to detail, and ability to work with Figma designs.
 
-First, run the development server:
+## Table of Contents
+- [About Me](#about-me)
+- [Project Overview](#project-overview)
+- [Live Demo](#live-demo) *(if deployed)*
+- [Tech Stack](#tech-stack)
+- [Setup Instructions](#setup-instructions)
+- [Contributors](#contributors)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## About Me
+Hi, my name is Nnamdi James. I’m a passionate full-stack developer with a strong interest in building intuitive user interfaces and robust backend systems. I enjoy solving real-world problems with code and continuously strive to improve my skills.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Overview
+This project is a front-end implementation of a design shared via Figma for the Huddlde technical assessment. It focuses on responsiveness, visual accuracy, and clean code practices.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Design link:** [Figma](<Insert-Figma-Link-Here>)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Live Demo
+You can view the live version of the project here: [Live Demo Link](<Insert-Link-If-Hosted>)
 
-## Learn More
+## Tech Stack
+- HTML5
+- CSS3 / Tailwind CSS
+- JavaScript / TypeScript
+- React (if applicable)
+- Git & GitHub
 
-To learn more about Next.js, take a look at the following resources:
+## Setup Instructions
+To run the project locally:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/huddlde-assessment.git
